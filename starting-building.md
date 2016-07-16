@@ -64,7 +64,7 @@ cd Firmware
 make posix_rpi_cross # for cross-compiler build
 ```
 
-The "mainapp" executable file is in the directory build_posix_rpi_cross/src/firmware/posix.
+The "px4" executable file is in the directory build_posix_rpi_cross/src/firmware/posix.
 Make sure you can connect to your RPi over ssh, see [instructions how to access your RPi](hardware-rpi.md#developer-quick-start).
 
 Then set the IP (or hostname) of your RPi using:
@@ -83,7 +83,7 @@ make posix_rpi_cross upload # for cross-compiler build
 Then, connect over ssh and run it with :
 
 ```sh
-./mainapp mainapp.config
+./px4 mainapp.config
 ```
 
 #### Native build
@@ -95,18 +95,18 @@ cd Firmware
 make posix_rpi_native # for native build
 ```
 
-The "mainapp" executable file is in the directory build_posix_rpi_native/src/firmware/posix.
+The "px4" executable file is in the directory build_posix_rpi_native/src/firmware/posix.
 Run it directly with :
 
 ```sh
-./build_posix_rpi_native/src/firmware/posix/mainapp ./posix-configs/rpi/mainapp.config
+./build_posix_rpi_native/src/firmware/posix/px4 ./posix-configs/rpi/mainapp.config
 ```
 
-A successful build followed by executing mainapp will give you this :
+A successful build followed by executing px4 will give you this :
 
 ```sh
 [init] shell id: 1996021760
-[init] task name: mainapp
+[init] task name: px4
 
 ______  __   __    ___
 | ___ \ \ \ / /   /   |
@@ -150,13 +150,13 @@ Connect to the Bebop's wifi and press the power button four times.
 ```sh
 telnet 192.168.42.1
 ```
-Run mainapp with:
+Run px4 with:
 ```sh
-mainapp
+px4
 ```
 
 <aside class="note">
-You can also use adb shell to start the mainapp.
+You can also use adb shell to start the px4.
 </aside>
 
 ### QuRT / Snapdragon based boards
@@ -200,18 +200,18 @@ Run the DSP debug monitor:
 ${HEXAGON_SDK_ROOT}/tools/mini-dm/Linux_Debug/mini-dm
 ```
 
-Go back to ADB shell and run mainapp:
+Go back to ADB shell and run px4:
 
 ```sh
 cd /home/linaro
-./mainapp mainapp.config
+./px4 mainapp.config
 ```
 
-Note that the mainapp will stop as soon as you disconnect the USB cable (or if you ssh session is disconnected). To fly, you should make the mainapp auto-start after boot.
+Note that the px4 will stop as soon as you disconnect the USB cable (or if you ssh session is disconnected). To fly, you should make the px4 auto-start after boot.
 
-#### Auto-start mainapp
+#### Auto-start px4
 
-To run the mainapp as soon as the Snapdragon has booted, you can add the startup to `rc.local`:
+To run the px4 as soon as the Snapdragon has booted, you can add the startup to `rc.local`:
 
 Either edit the file `/etc/rc.local` directly on the Snapdragon:
 
@@ -231,7 +231,7 @@ adb push rc.local /etc/rc.local
 For the auto-start, add the following line before `exit 0`:
 
 ```sh
-(cd /home/linaro && ./mainapp mainapp.config > mainapp.log)
+(cd /home/linaro && ./px4 mainapp.config > px4.log)
 
 exit 0
 ```
